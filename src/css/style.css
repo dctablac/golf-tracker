@@ -103,6 +103,31 @@
 }
 
 
+.scorecard-history {
+    display: grid;
+    justify-items: center;
+    padding: 2vh;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    row-gap: 2vh;
+}
+.scorecard-preview {
+    position: relative;
+    display: grid;
+    border: 1px solid black;
+    height: 200px;
+    width: 200px;
+}
+.prev-filler {
+    height: 150px;
+    width: 200px;
+    background-color: blue;
+}
+.green {
+    background-color: green;
+}
+
+
 
 .scorecard-template {
     position: relative;

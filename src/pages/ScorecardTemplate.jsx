@@ -64,6 +64,54 @@ class ScorecardTemplate extends Component {
         this.setState({ [name]: value} );
     };
 
+    clearChanges = () => {
+        this.setState(
+            {
+                course_name: "",
+                play_date: this.getTodaysDate(),
+                yard_1: "0", yard_2: "0",
+                yard_3: "0", yard_4: "0",
+                yard_5: "0", yard_6: "0",
+                yard_7: "0", yard_8: "0",
+                yard_9: "0", yard_front: "0",
+                yard_10: "0", yard_11: "0",
+                yard_12: "0", yard_13: "0",
+                yard_14: "0", yard_15: "0",
+                yard_16: "0", yard_17: "0",
+                yard_18: "0", yard_back: "0",
+                yard_total: "0", yard_handicap: "0",
+                par_1: "0", par_2: "0", par_3: "0",
+                par_4: "0", par_5: "0", par_6: "0",
+                par_7: "0", par_8: "0", par_9: "0",
+                par_front: "0", par_10: "0", par_11: "0",
+                par_12: "0", par_13: "0", par_14: "0", par_15: "0",
+                par_16: "0", par_17: "0", par_18: "0", par_back: "0",
+                par_total: "0", p1_hole_1: "0", p1_hole_2: "0", p1_hole_3: "0",
+                p1_hole_4: "0", p1_hole_5: "0", p1_hole_6: "0", p1_hole_7: "0", 
+                p1_hole_8: "0", p1_hole_9: "0", p1_front: "0", p1_hole_10: "0", 
+                p1_hole_11: "0", p1_hole_12: "0", p1_hole_13: "0", p1_hole_14: "0", 
+                p1_hole_15: "0", p1_hole_16: "0", p1_hole_17: "0", p1_hole_18: "0", 
+                p1_back: "0", p1_total: "0", p1_handicap: "0", p2_hole_1: "0", p2_hole_2: "0", p2_hole_3: "0",
+                p2_hole_4: "0", p2_hole_5: "0", p2_hole_6: "0", p2_hole_7: "0", 
+                p2_hole_8: "0", p2_hole_9: "0", p2_front: "0", p2_hole_10: "0", 
+                p2_hole_11: "0", p2_hole_12: "0", p2_hole_13: "0", p2_hole_14: "0", 
+                p2_hole_15: "0", p2_hole_16: "0", p2_hole_17: "0", p2_hole_18: "0", 
+                p2_back: "0", p2_total: "0", p2_handicap: "0", p3_hole_1: "0", p3_hole_2: "0", p3_hole_3: "0",
+                p3_hole_4: "0", p3_hole_5: "0", p3_hole_6: "0", p3_hole_7: "0", 
+                p3_hole_8: "0", p3_hole_9: "0", p3_front: "0", p3_hole_10: "0", 
+                p3_hole_11: "0", p3_hole_12: "0", p3_hole_13: "0", p3_hole_14: "0", 
+                p3_hole_15: "0", p3_hole_16: "0", p3_hole_17: "0", p3_hole_18: "0", 
+                p3_back: "0", p3_total: "0", p3_handicap: "0", p4_hole_1: "0", p4_hole_2: "0", p4_hole_3: "0",
+                p4_hole_4: "0", p4_hole_5: "0", p4_hole_6: "0", p4_hole_7: "0", 
+                p4_hole_8: "0", p4_hole_9: "0", p4_front: "0", p4_hole_10: "0", 
+                p4_hole_11: "0", p4_hole_12: "0", p4_hole_13: "0", p4_hole_14: "0", 
+                p4_hole_15: "0", p4_hole_16: "0", p4_hole_17: "0", p4_hole_18: "0", 
+                p4_back: "0", p4_total: "0", p4_handicap: "0"
+            }, alert('All changes have been cleared.')
+        );
+
+    }
+
     render() {
         const { course_name, play_date, yard_1,
                 yard_2, yard_3, yard_4, yard_5,
@@ -547,7 +595,7 @@ class ScorecardTemplate extends Component {
                 </div>
 
                 <div className="btn">Create</div>
-                <div className="btn btn-delete">Delete</div>
+                <div className="btn btn-delete" onClick={this.clearChanges}>Clear</div>
             </Fragment>
         )
     }
