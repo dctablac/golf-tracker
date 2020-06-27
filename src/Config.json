@@ -1,0 +1,15 @@
+{
+    "idmUrl": "http://localhost:3307/api",
+    "moviesUrl": "http://localhost:3308/api",
+    "pollLimit": 20,
+    "idmEPs": {
+        "loginEP": "/idm/login",
+        "registerEP": "/idm/register"
+    },
+    "scorecardsEP": {
+        "createEP": "/scorecards/create",
+        "retrieveEP": "/scorecards/retrieve",
+        "updateEP": "/scorecards/update",
+        "deleteEP": "/scorecards/delete"
+    }
+}
