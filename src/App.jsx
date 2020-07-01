@@ -5,8 +5,33 @@ import NavBar from "./NavBar";
 import Content from "./Content";
 import Footer from "./Footer";
 
+const localStorage = require('local-storage');
+
 class App extends Component {
+    state = {
+        loggedIn: this.checkLoggedIn()
+    }
+
+    checkLoggedIn() {
+        return (
+            localStorage.get("email") != null
+        );
+    }
+
+    handleLogOut = () => {
+        localStorage.remove("email");
+        this.setState({loggedIn: false});
+    }
+
+    handleLogIn = (email) => {
+        localStorage.set("email", email);
+        this.setState({loggedIn: true});
+    }
+
     render() {
+
+        const { loggedIn } = this.state;
+
         return (
             <div className="app">
                 <div className="top-image">
@@ -17,8 +42,8 @@ class App extends Component {
                         </a>
                     </div>
                 </div>
-                <NavBar />
-                <Content />
+                <NavBar loggedIn={loggedIn} handleLogOut={this.handleLogOut}/>
+                <Content loggedIn={loggedIn} handleLogOut={this.handleLogOut} handleLogIn={this.handleLogIn} />
                 <Footer />
             </div>
         );

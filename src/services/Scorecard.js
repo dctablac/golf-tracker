@@ -1,28 +1,56 @@
 import Socket from "../util/Socket";
-import { scorecardURL, scorecardEPs } from "../Config.json";
+import { scorecardUrl, scorecardEPs } from "../Config.json";
+import Axios from "axios";
 
-const { createEP, rertieveEP, updateEP, deleteEP } = scorecardEPs;
+const { createEP, retrieveEP, updateEP, deleteEP } = scorecardEPs;
 
 async function createCard(email, card) {
-    const createURL = scorecardURL + createEP;
+    const createURL = scorecardUrl + createEP;
 
     return await Socket.POST(createURL, card);
 }
 
-async function retrieveCard(email, card) {
-    const retrieveURL = scorecardURL + retrieveEP;
+async function allCards(email) {
+    const allURL = scorecardUrl + retrieveEP;
 
-    return await Socket.POST(retrieveURL, card);
+    const { common } = Axios.defaults.headers;
+
+    common["email"] = email;
+
+    return await Socket.GET(allURL, email);
 }
 
-async function updateCard(email, card) {
-    const updateURL = scorecardURL + updateEP;
+async function retrieveCard(email, id) {
+    const retrieveURL = scorecardUrl + retrieveEP + "/" + id;
+
+    const { common } = Axios.defaults.headers;
+
+    common["email"] = email;
+
+    return await Socket.GET(retrieveURL);
+}
+
+async function updateCard(card, id) {
+    const updateURL = scorecardUrl + updateEP + "/" + id;
 
     return await Socket.POST(updateURL, card);
 }
 
-async function deleteCard(email, card) {
-    const createURL = scorecardURL + createEP;
+async function deleteCard(email, id) {
+    const deleteURL = scorecardUrl + deleteEP;
 
-    return await Socket.POST(deleteURL, card);
+    const payLoad = {
+        email: email,
+        id: id
+    }
+
+    return await Socket.POST(deleteURL, payLoad);
 }
+
+export default {
+    createCard,
+    allCards,
+    retrieveCard,
+    deleteCard,
+    updateCard
+};

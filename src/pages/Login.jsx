@@ -12,10 +12,15 @@ class Login extends Component {
         e.preventDefault();
 
         const { email, password } = this.state;
+        const { handleLogIn } = this.props;
         
         Idm.login(email, password)
           .then(response => {
-              console.log(response);
+              alert(response.data["message"]);
+              if (response.data["resultCode"] === 120) {
+                handleLogIn(email);
+                this.props.history.push('/home');
+              }
           })
           .catch(error => console.log(error));
     };

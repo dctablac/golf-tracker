@@ -14,7 +14,8 @@ class Register extends Component {
 
         Idm.register(email, password)
           .then(response => {
-              console.log(response);
+              alert(response.data["message"]);
+              this.props.history.push('/login');
           })
           .catch(error => console.log(error));
     };

@@ -3,7 +3,7 @@ import Scorecard from "../services/Scorecard";
 
 const localStorage = require('local-storage');
 
-class ScorecardTemplate extends Component {
+class ScorecardEdit extends Component {
     getTodaysDate = () => {
         const d = new Date();
         let result = d.toLocaleDateString().split('/');
@@ -69,7 +69,7 @@ class ScorecardTemplate extends Component {
         this.setState({ [name]: value} );
     };
 
-    clearChanges = () => {
+    clearCard = () => {
         this.closeClear();
         this.setState(
             {
@@ -130,13 +130,31 @@ class ScorecardTemplate extends Component {
         document.getElementById("confirm-box-1").setAttribute("class","delete-confirmation-box");
         document.getElementById("tool-1").setAttribute("class","btn");
         document.getElementById("tool-2").setAttribute("class","btn btn-delete");
+        document.getElementById("tool-3").setAttribute("class","btn btn-delete");
     }
 
     confirmClear() {
         document.getElementById("confirm-box-1").setAttribute("class","delete-confirmation-box-active");
         document.getElementById("tool-1").setAttribute("class","btn-hidden");
         document.getElementById("tool-2").setAttribute("class","btn-hidden");
+        document.getElementById("tool-3").setAttribute("class", "btn-hidden");
     }
+
+    closeCancel() {
+        document.getElementById("confirm-box-2").setAttribute("class","delete-confirmation-box");
+        document.getElementById("tool-1").setAttribute("class","btn");
+        document.getElementById("tool-2").setAttribute("class","btn btn-delete");
+        document.getElementById("tool-3").setAttribute("class","btn btn-delete");
+    }
+
+    confirmCancel() {
+        document.getElementById("confirm-box-2").setAttribute("class","delete-confirmation-box-active");
+        document.getElementById("tool-1").setAttribute("class","btn-hidden");
+        document.getElementById("tool-2").setAttribute("class","btn-hidden");
+        document.getElementById("tool-3").setAttribute("class", "btn-hidden");
+    }
+
+
 
     handleSubmit = (e) => {
         e.preventDefault();
@@ -178,7 +196,7 @@ class ScorecardTemplate extends Component {
             p4_front, p4_hole_10, p4_hole_11,
             p4_hole_12, p4_hole_13, p4_hole_14, p4_hole_15,
             p4_hole_16, p4_hole_17, p4_hole_18, p4_back,
-            p4_total, p4_handicap } = this.state;
+            p4_total, p4_handicap, id } = this.state;
 
         if (course_name === "") {
             alert("Please enter a course name for the scorecard.");
@@ -250,15 +268,25 @@ class ScorecardTemplate extends Component {
                 }
             }
 
-            Scorecard.createCard(localStorage.get("email"), payLoad)
+            Scorecard.updateCard(payLoad, id)
               .then(response => {
                   alert(response.data["message"])
-                  if (response.data["resultCode"] === 130) {
+                  if (response.data["resultCode"] === 170) {
                     this.props.history.push('/scorecard/all')
                   }
                 })
               .catch(err => console.log(err));
         }
+    }
+
+    cancelEdits = () => {
+        this.props.history.push("/scorecard/all");
+    }
+
+    componentDidMount() {
+        this.setState(localStorage.get("state"));
+        this.setState({play_date: this.getTodaysDate()});
+        localStorage.remove("state");
     }
 
     render() {
@@ -305,12 +333,17 @@ class ScorecardTemplate extends Component {
         if (loggedIn) {
             return (
                 <Fragment>
+                    <h1 className="content-title">Edit Scorecard</h1>
                     <div id="confirm-box-1" className="delete-confirmation-box">
                             <h3>Clear entire scorecard?</h3>
-                            <div className="btn btn-delete btn-confirm" onClick={this.clearChanges}>Confirm</div>
+                            <div className="btn btn-delete btn-confirm" onClick={this.clearCard}>Confirm</div>
                             <div className="btn btn-confirm" onClick={this.closeClear}>Cancel</div>
                     </div>
-                    <h1 className="content-title">New Scorecard</h1>
+                    <div id="confirm-box-2" className="delete-confirmation-box">
+                            <h3>Discard all changes?</h3>
+                            <div className="btn btn-delete btn-confirm" onClick={this.cancelEdits}>Confirm</div>
+                            <div className="btn btn-confirm" onClick={this.closeCancel}>Cancel</div>
+                        </div>
                     <div className="scorecard-template-title">
                         <label>Course:</label>
                         <input className="course-name" name="course_name" 
@@ -763,8 +796,9 @@ class ScorecardTemplate extends Component {
                         </div>
                     </div>
 
-                    <div id="tool-1" className="btn" onClick={this.handleSubmit}>Create</div>
+                    <div id="tool-1" className="btn" onClick={this.handleSubmit}>Submit Edit</div>
                     <div id="tool-2" className="btn btn-delete" onClick={this.confirmClear}>Clear</div>
+                    <div id="tool-3" className="btn btn-delete" onClick={this.confirmCancel}>Cancel</div>
             </Fragment>
             );
         } else {
@@ -773,4 +807,4 @@ class ScorecardTemplate extends Component {
     }
 }
 
-export default ScorecardTemplate;
+export default ScorecardEdit;
