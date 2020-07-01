@@ -1,6 +1,6 @@
 {
-    "idmUrl": "http://localhost:3307/api",
-    "scorecardUrl": "http://localhost:3308/api",
+    "idmUrl": "https://tgt-idm.herokuapp.com/api",
+    "scorecardUrl": "https://tgt-scorecards.herokuapp.com/api",
     "pollLimit": 20,
     "idmEPs": {
         "loginEP": "/idm/login",
