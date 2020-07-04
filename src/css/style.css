@@ -47,7 +47,8 @@
 
 
 .nav-bar {
-    position: relative;
+    position: sticky;
+    top: 0;
     padding-left: 0px;
     display: flex;
     width: 100%;
@@ -55,6 +56,7 @@
     background-color: rgb(78, 143, 78);
     align-items: center;
     justify-content: left;
+    z-index: 1;
 }
 .nav-link {
     display: flex;
