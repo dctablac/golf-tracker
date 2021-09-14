@@ -30,11 +30,13 @@ class Register extends Component {
 
         return (
             <form className="cred-form" onSubmit={this.handleSubmit}>
-                <h1 className="content-title">Register</h1>
-                <label>Email</label>
-                <input className="cred-input" type="email" name="email" value={email} onChange={this.updateField} />
-                <label>Password</label>
-                <input className="cred-input" type="password" name="password" value={password} onChange={this.updateField} />
+                <h2 className="content-title">Register</h2>
+
+                <div className="cred-container">
+                    <input className="cred-input" type="email" name="email" value={email} onChange={this.updateField} autoComplete="off" placeholder="Email"/>
+                    <input className="cred-input" type="password" name="password" value={password} onChange={this.updateField} placeholder="Password"/>
+                </div>
+                
                 <button className="form-btn" type="submit">Register</button>
             </form>
         );

@@ -1,25 +1,10 @@
 import Axios from "axios";
-//import Cookies from "js-cookie";  // using local-storage instead
-
-//import Config from "../Config.json";
-
-//const localStorage = require("local-storage");
-
-//const { idmUrl } = Config;
 
 const HTTPMethod = Object.freeze({
   GET: "GET",
   POST: "POST",
   DELETE: "DELETE"
 });
-
-// function initSocket() {
-//   const { common } = Axios.defaults.headers;
-
-//   common["session_id"] = localStorage.get("session_id");
-
-//   Axios.defaults.baseURL = baseUrl;
-// }
 
 async function GET(path) {
   return await sendHTTP(HTTPMethod.GET, path);
@@ -50,51 +35,11 @@ async function sendHTTP(method, path, data) {
     // Should never reach here
   }
 
-  /************************************************
-        TODO Do error checking on response 
-  ************************************************/
-
   return await response;
   // return await getReport(response);
 }
 
-// async function getReport(response) {
-//   const axiosConfig = {
-//     headers: { transaction_id: response.headers["transaction_id"] }
-//   };
-
-//   return await pollForReport(axiosConfig);
-// }
-
-// async function pollForReport(axiosConfig) {
-//   let noContent = 204;
-
-//   for (let i = 0; i < pollLimit; i++) {
-//     const response = await Axios.get(gatewayEPs.reportEP, axiosConfig);
-    
-//     if (response.status !== noContent) {
-//       /************************************************
-//             TODO More Robust checking for response  
-//       ************************************************/
-//      if (response.data.resultCode !== 120) {
-//        localStorage.set("session_id", response.headers.session_id);
-//      }
-//       return response;
-//     } else await timeOut();
-//   }
-
-//   return undefined;
-// }
-
-// async function timeOut() {
-//   return new Promise(resolve => {
-//     let pollingLimit = 500;
-//     setTimeout(() => resolve(), pollingLimit);
-//   });
-// }
-
 export default {
-  // initSocket,
   GET,
   POST,
   DELETE

@@ -4,6 +4,11 @@
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
 }
+:root {
+    --form-button-color: rgb(77, 143, 64);
+    --form-button-hover-color: rgba(77, 143, 64, 50%);
+}
+
 .top-image {
     height: 100vh;
     width: 100vw;
@@ -248,9 +253,6 @@
     margin-right: 2vw;
     width: 20vw;
 }
-label {
-    margin-right: 1vw;
-}
 .loading {
     text-align: center;
     margin: 20vh;
@@ -344,52 +346,66 @@ label {
 }
 
 
-
+.cred-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
 .cred-form {
     position: relative;
-    display: grid;
+    display: flex;
+    flex-direction: column;
     background-color: white;
     gap: 10px;
-    justify-content: center;
-    border: 1px solid black;
+    justify-content: space-evenly;
+    align-items: center;
     border-radius: 2px;
     padding: 3vw;
-    height: 45vh;
+    height: 65vh;
     width: 30vw;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 5px 5px 5px grey;
+    box-shadow: 0px 5px 5px grey;
     font-size: 1vw;
     font-weight: 700;
 
 }
+.cred-label {
+    border: 1px solid red;
+}
 .cred-input {
     position: relative;
-    height: 3vh;
-    width: 20vw;
     font-size: 1vw;
-    border: none;
-    border-bottom: 1px solid black;
+    border: 2px solid grey;
+    border-radius: 50px;
+    padding: 3%;
     outline: none;
 }
 .cred-input:focus {
-    border-bottom: 1px solid blue;
-    transition: 0.3s ease-out;
+    border: 2px solid var(--form-button-color);
+    transition: border 0.3s;
+}
+.cred-input:first-of-type {
+    margin-bottom: 10%;
 }
 .form-btn {
     position: relative;
     justify-self: center;
     cursor: pointer;
     font-size: 1vw;
-    border-radius: 4px;
-    width: 15vw;
-    background-color: rgb(103, 148, 231);
-    color: white;
+    border-radius: 50px;
+    height: 10%;
+    width: 50%;
+    background-color: white;
+    border: 1px solid var(--form-button-color);
+    color: var(--form-button-color);
     font-weight: 700;
+    transition: background-color 0.3s, color 0.3s;
 }
 .form-btn:hover {
-    background-color: rgb(130, 166, 231);
+    background-color: var(--form-button-color);
+    color: white;
 }
 
 .social-media-icon {
